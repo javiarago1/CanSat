@@ -1,7 +1,6 @@
 #ifndef INFO_STRUCTURE
 #define INFO_STRUCTURE
 
-
 struct StateInfo {
   int packetNumber;
   double latitude;
