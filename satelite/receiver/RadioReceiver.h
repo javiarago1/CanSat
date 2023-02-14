@@ -12,7 +12,7 @@ private:
   unsigned long lastResponseTime = 0; 
 public:
   RadioReceiver(struct StateInfo &);
-  void receiveInfo();
+  bool receiveInfo();
 };
 
 

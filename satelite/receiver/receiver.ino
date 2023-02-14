@@ -1,4 +1,5 @@
 #include "RadioReceiver.h"
+#include "Serializer.h"
 
 struct StateInfo stateInfo;
 
@@ -10,8 +11,12 @@ void setup() {
 }
 
 void loop() {
+  if (radioReceiver.receiveInfo()){
+    String jsonOfStruct;
+    Serializer::stateInfo2JSONString(stateInfo,jsonOfStruct);
+     Serial.println("");
+    Serial.println(jsonOfStruct);
   
-  radioReceiver.receiveInfo();
-  // Esperar un tiempo antes de recibir más datos
+  }
   delay(10);
 }
