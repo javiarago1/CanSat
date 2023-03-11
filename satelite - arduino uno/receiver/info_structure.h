@@ -2,12 +2,14 @@
 #define INFO_STRUCTURE
 
 
+
 struct StateInfo {
   int packetNumber;
   double latitude;
   double longitude;
-  double velocity;
-  double course;
+  double temperature;
+  double pressure;
+  double altitude;
 };
 
 
