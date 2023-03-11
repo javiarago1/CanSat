@@ -1,0 +1,23 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ioredis": "^5.3.1",
+    "lru-cache": "^7.18.2",
+    "mysql": "^2.18.1",
+    "redis": "^4.6.4",
+    "socket.io": "^4.6.0",
+    "ws": "^8.12.1"
+  }
+}

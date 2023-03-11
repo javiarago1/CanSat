@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourApp Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.24.1/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@0.1.1/dist/chartjs-adapter-luxon.min.js"></script>
+    <script src="js/script.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsey3Ze26tgUx-In8Kl2lk9eqeVV91p3Y&callback=initMap"></script>
+
+
+</head>
+
+<body>
+<div class="container" id="top">
+    <header>
+        <img class="logo" src="icons/cansat-icon.png" alt="logo">
+        <div class="header-nav">
+            <img class="profile-pic" src="images/josh.jpg" alt="User Avatar">
+            <h3 class="profile-name">Guest</h3>
+        </div>
+    </header>
+    <nav>
+        <div class="side-nav" id="js-nav">
+            <a href="#top" class="nav-icons nav-selected" id="btn-top"><img
+                    src="icons/icon-dashboard.svg"
+                    alt="dashboard"></a>
+            <a href="#traffic" class="nav-icons" id="btn-traffic"><img
+                    src="icons/icon-visits.svg" alt="visits"></a>
+            <a href="#activity" class="nav-icons" id="btn-activity"><img
+                    src="icons/icon-members.svg" alt="members"></a>
+            <a href="#settings" class="nav-icons" id="btn-settings"><img
+                    src="icons/icon-settings.svg"
+                    alt="settings"></a>
+        </div>
+    </nav>
+    <main class="grid-main">
+
+        <div class="grid-0" id="output">
+
+        </div>
+
+        <div class="grid-1">
+            <h3>GPS Location</h3>
+            <div style="width: 100%;height: 300px;" id="map"></div>
+            <br>
+            <hr>
+            <h3>GPS Data</h3>
+            <p id="latitude"></p>
+            <p id="longitude"></p>
+            <p id="distance_traveled"></p>
+            <p id="speed"></p>
+            <p id="heading"></p>
+
+        </div>
+
+        <div class="grid-2" id="traffic">
+            <hr>
+
+            <h3>Temperature vs time</h3>
+            <div class="chart-1" style="position: relative; height:400px;
+            width:100%;padding-top: 40px; padding-bottom: 40px">
+                <canvas id="temperature-chart"></canvas>
+            </div>
+        </div>
+
+
+        <footer class="grid-10">
+            <p>Developed by Javier Aragoneses</p>
+        </footer>
+    </main>
+</div>
+</body>
+
+</html>
