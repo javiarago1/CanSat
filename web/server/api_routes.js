@@ -3,6 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require("mysql");
 const LRU = require("lru-cache");
+const axios = require('axios');
+
 
 const api_routes = express();
 
@@ -18,6 +20,17 @@ const db = mysql.createConnection({
 
 const cache = new LRU({ max: 500 });
 
+api_routes.get('/api/pressure', async (req, res) => {
+    try {
+        const response = await axios.get('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/madrid?unitGroup=metric&elements=pressure&include=fcst%2Ccurrent&key=RUYGNM558QPRY5NLNQX9NFHVS&options=nonulls&contentType=json');
+        const data = response.data;
+        res.send({ pressure: data.currentConditions.pressure });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Error al obtener la información de presión atmosférica' });
+    }
+});
+
 api_routes.post('/api/insertData', (req, res) => {
 
 
@@ -28,7 +41,6 @@ api_routes.post('/api/insertData', (req, res) => {
             " insertado");
         return res.send("Este paquete ya se ha registrado previamente.");
     }
-
     let sql = "INSERT INTO PacketData (packetNumber, latitude, longitude, "+
         "temperature, pressure, altitude, timeStamp) VALUES (?, ?, ?, ?, ?, ?," +
         " NOW(3))"
