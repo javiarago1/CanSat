@@ -8,5 +8,9 @@ struct __attribute__((packed)) TPAState {
   float altitude;
 };
 
+struct __attribute__((packed)) ConfigData {
+  float pressure;
+};
+
 
 #endif

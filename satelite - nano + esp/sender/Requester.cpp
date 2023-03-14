@@ -1,5 +1,38 @@
 #include "Requester.h"
 
+Requester::Requester()
+  : serialPort(2) {
+  Serial.begin(9600);
+  serialPort.begin(9600, SERIAL_8N1, rx2pin, tx2pin);
+  serialTransfer.begin(serialPort);
+}
+
+char rec[3];
+
+void Requester::sendPressureToNano(float dailiyPressure) {
+  Serial.println("WAT?");
+  unsigned long startTime = millis();
+  bool received = false;
+  ConfigData configData;
+  configData.pressure = dailiyPressure;
+  uint16_t sendSize = 0;
+  while (millis() - startTime < 20000 && !received) {
+    sendSize = serialTransfer.txObj(configData, sendSize);
+    serialTransfer.sendData(sendSize);
+    delay(1000);
+    if (serialTransfer.available()) {
+      uint16_t recSize = 0;
+      recSize = serialTransfer.rxObj(rec, recSize);
+      if (strcmp(rec, "REC") == 0) {
+        Serial.println("Configuration of pressure correctly");
+        received = true;
+      } else {
+        Serial.println("Not receiving response of configuration success");
+      }
+    }
+  }
+}
+
 void Requester::setupWifi(const char* ssid, const char* password) {
   Serial.begin(9600);
   WiFi.begin(ssid, password);
@@ -48,7 +81,7 @@ void Requester::requestMadridDailyPressure(TPAManager& tpaManager) {
         Serial.println(error.c_str());
         return;
       }
-      float pressure = doc["pressure"];  
+      float pressure = doc["pressure"];
       tpaManager.dailyPressure = pressure;
 
 
