@@ -9,10 +9,14 @@
 
 class TPAManager {
 private:
-  struct StateInfo & stateInfo;
-  Adafruit_BMP280 bmp; // I2C
+  struct StateInfo& stateInfo;
+  Adafruit_BMP280 bmp;  // I2C
+  float prevAltitude;
+  bool hasAscended;
+  bool firstTime;
 public:
-  TPAManager(struct StateInfo & stateInfo);
+  double dailyPressure = 1021;
+  TPAManager(struct StateInfo& stateInfo);
   void getTPAData();
 };
 

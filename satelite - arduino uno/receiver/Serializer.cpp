@@ -1,12 +1,23 @@
 #include "Serializer.h"
 
-void Serializer::stateInfo2JSONString(struct StateInfo& stateInfo, String& json) {
-  StaticJsonDocument<200> doc;
-  doc["packetNumber"] = stateInfo.packetNumber;
-  doc["latitude"] = stateInfo.latitude;
-  doc["longitude"] = stateInfo.longitude;
-  doc["temperature"] = stateInfo.temperature;
-  doc["pressure"] = stateInfo.pressure;
-  doc["altitude"] = stateInfo.altitude;
-  serializeJson(doc, json);
+void Serializer::printStateInfoToBothSerials(struct StateInfo& stateInfo, SoftwareSerial& espSerial) {
+  Serial.print("\n");
+  espSerial.print("\n");
+  String json = "";
+  json = "{";
+  json += "\"packetNumber\":" + String(stateInfo.packetNumber) + ",";
+  json += "\"latitude\":" + String(stateInfo.latitude) + ",";
+  json += "\"longitude\":" + String(stateInfo.longitude) + ",";
+  Serial.print(json);
+  espSerial.print(json);
+  json = "";
+  json += "\"temperature\":" + String(stateInfo.temperature) + ",";
+  json += "\"pressure\":" + String(stateInfo.pressure) + ",";
+  json += "\"altitudeStatus\":" + String(stateInfo.altitudeStatus) + ",";
+  json += "\"altitude\":" + String(stateInfo.altitude);
+  json += "}";
+  Serial.print(json);
+  espSerial.print(json);
+  Serial.print("\n");
+  espSerial.print("\n");
 }

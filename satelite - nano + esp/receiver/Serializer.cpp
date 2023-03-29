@@ -10,6 +10,7 @@ void Serializer::stateInfo2JSONString(struct StateInfo& stateInfo, String& json)
   json += "\"temperature\":" + String(stateInfo.temperature) + ",";
   json += "\"pressure\":" + String(stateInfo.pressure) + ",";
   json += "\"humidity\":" + String(stateInfo.humidity) + ",";
+  json += "\"altitudeStatus\":" + String(stateInfo.altitudeChangeStatus) + ",";
   json += "\"altitude\":" + String(stateInfo.altitude);
   json += "}";
 }

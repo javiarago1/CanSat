@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require("mysql");
 const LRU = require("lru-cache");
 const axios = require('axios');
-
+const Redis = require('ioredis');
+const redis = new Redis();
 
 const api_routes = express();
 
@@ -12,10 +13,58 @@ api_routes.use(cors());
 api_routes.use(bodyParser.json());
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'satelite'
+    host: 'db-satelite-do-user-13771732-0.b.db.ondigitalocean.com',
+    user: 'javier',
+    password: 'AVNS_IoBshhllaHmSQ-5aiQQ',
+    database: 'satelite',
+    port: 25060
+});
+
+const sessions = [];
+
+api_routes.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Verificar si las credenciales son válidas
+    if (username === 'admin' && password === 'admin') {
+        // Generar un token de sesión
+        const sessionToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+        const newSession = { token: sessionToken, username };
+        sessions.push(newSession);
+
+        res.status(200).json({ token: sessionToken });
+    } else {
+        res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+});
+
+api_routes.post('/reset-services', (req, res) => {
+    const sessionToken = req.headers.authorization.split(' ')[1];
+    const query = `DELETE FROM PacketData`;
+
+
+
+    const session = sessions.find((session) => session.token === sessionToken);
+    if (session) {
+        res.status(200).json({ message: 'Servicios reiniciados' });
+        redis.flushall()
+            .then(() => {
+                console.log('All data in Redis has been deleted.');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+        db.query(query, (err) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log('All data deleted from MySQL');
+            }
+        });
+    } else {
+        res.status(401).json({ error: 'Token de sesión inválido' });
+    }
 });
 
 const cache = new LRU({ max: 500 });

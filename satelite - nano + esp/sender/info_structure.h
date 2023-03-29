@@ -10,6 +10,7 @@ struct __attribute__((packed)) StateInfo {
   float pressure;
   float humidity;
   float altitude;
+  float altitudeChangeStatus;
 };
 
 

@@ -902,7 +902,7 @@ GRID MAIN LAYOUT*
 .grid-3 {
   grid-area: daily-traffic;
   padding: 7rem 0 2.5rem 0;
-  border-top: 0.12rem solid #d1d1d1;
+
 }
 @media (min-width: 768px) {
   .grid-3 {
@@ -911,9 +911,9 @@ GRID MAIN LAYOUT*
 }
 @media (min-width: 1024px) {
   .grid-3 {
-    border-right: 0.12rem solid #d1d1d1;
-    border-bottom: 0.12rem solid #d1d1d1;
-    padding: 1.5rem 0.8rem 2.5rem 0;
+
+    padding: 7rem 0 2.5rem 0.8rem;
+
   }
 }
 
@@ -928,7 +928,7 @@ GRID MAIN LAYOUT*
 }
 @media (min-width: 1024px) {
   .grid-4 {
-    padding: 1.5rem 0 2.5rem 0.8rem;
+    padding: 7rem 0 2.5rem 0.8rem;
   }
 }
 
@@ -958,7 +958,7 @@ GRID MAIN LAYOUT*
 }
 @media (min-width: 1024px) {
   .grid-6 {
-    border-right: 0.12rem solid #d1d1d1;
+
     padding-right: 3.2rem;
   }
 }
@@ -989,7 +989,7 @@ GRID MAIN LAYOUT*
 }
 @media (min-width: 1024px) {
   .grid-8 {
-    border-right: 0.12rem solid #d1d1d1;
+
     padding: 1.6rem 3.2rem 1.6rem 0;
   }
 }
@@ -1018,7 +1018,7 @@ GRID MAIN LAYOUT*
 .grid-4,
 .grid-6,
 .grid-7 {
-  border-top: 0.12rem solid #d1d1d1;
+
   border-bottom: 0.12rem solid #d1d1d1;
 }
 
@@ -1038,14 +1038,15 @@ GRID MAIN LAYOUT*
 }
 
 .logo {
-  width: 1rem;
+  width: 2px;
+  height: 2px;
   margin-right: auto;
   margin-bottom: 1rem;
 }
 @media (min-width: 768px) {
   .logo {
-    width: 70px;
-    height: 70px;
+    width: 25px;
+    height: 25px;
     margin-bottom: 0;
   }
 }
@@ -1080,6 +1081,21 @@ GRID MAIN LAYOUT*
   margin-right: 1.6rem;
   margin-top: 2.3rem;
   color: white;
+}
+
+.sign-out {
+  width: 60px;
+  height: 25px;
+  margin-right: 1.6rem;
+  margin-top: 1.8rem;
+  color: whitesmoke;
+  cursor: pointer;
+  border: solid 1px whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
 }
 
 .nav-icons {

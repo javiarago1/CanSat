@@ -3,6 +3,9 @@
 
 #include <EasyTransfer.h>
 #include "info_structure.h"
+#include "TPAManager.h"
+
+
 
 class RadioSender {
 private:
@@ -15,6 +18,7 @@ private:
 public:
   RadioSender(struct StateInfo &);
   void sendInfo();
+  void readAtmosphericPressure(TPAManager & tpaManager);
 };
 
 

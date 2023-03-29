@@ -5,23 +5,17 @@
 struct StateInfo stateInfo;
 
 RadioReceiver radioReceiver(stateInfo);
-SoftwareSerial espSerial(2, 3); // RX, TX
+SoftwareSerial espSerial(2, 3);  // RX, TX
 
 void setup() {
   Serial.begin(9600);
   espSerial.begin(9600);
-
+  radioReceiver.sendPressure(espSerial);
 }
 
 void loop() {
-  if (radioReceiver.receiveInfo()){
-    String jsonOfStruct;
-    Serializer::stateInfo2JSONString(stateInfo,jsonOfStruct);
-    Serial.println("");
-    Serial.println(jsonOfStruct);
-    espSerial.println(jsonOfStruct);
-
-  
+  if (radioReceiver.receiveInfo()) {
+    Serializer::printStateInfoToBothSerials(stateInfo, espSerial);
   }
   delay(10);
 }

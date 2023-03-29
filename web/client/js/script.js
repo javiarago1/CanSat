@@ -7,9 +7,146 @@ let lastPacketNumber=-1;
 
 let previousTimeChart;
 
-window.onload = setupChart
+window.onload = setup
+
+
 
 let chart;
+
+let pressureChart;
+
+let altitudeChart;
+
+function setup(){
+    setupChart()
+    setupPressureChart()
+    setupAltitudeChart()
+}
+
+function setupAltitudeChart(){
+    let ctx = document.getElementById('altitude-chart').getContext('2d');
+    altitudeChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Altitude',
+                    data: [],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        let dataset = data.datasets[tooltipItem.datasetIndex];
+                        let index = tooltipItem.index;
+                        let y = dataset.data[index].y;
+                        let date = dataset.data[index].date;
+                        let packetNumber = dataset.data[index].packetNumber;
+                        return `Packet number: ${packetNumber} Time stamp: ${date} Altitude: ' ${y} ' m`;
+                    }
+                }
+            },
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time (seconds)'
+                    }, ticks: {
+                        callback: function (value) {
+                            return value + 's';
+                        }
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Altitude (m)'
+                    }, ticks: {
+                        callback: function (value) {
+                            return value + ' m';
+                        }
+                    }
+                }]
+            }
+        }
+    });
+}
+
+
+function setupPressureChart(){
+    let ctx = document.getElementById('pressure-chart').getContext('2d');
+    pressureChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Pressure',
+                    data: [],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        let dataset = data.datasets[tooltipItem.datasetIndex];
+                        let index = tooltipItem.index;
+                        let y = dataset.data[index].y;
+                        let date = dataset.data[index].date;
+                        let packetNumber = dataset.data[index].packetNumber;
+                        return `Packet number: ${packetNumber} Time stamp: ${date} Pressure: ' ${y} ' Pa`;
+                    }
+                }
+            },
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time (seconds)'
+                    }, ticks: {
+                        callback: function (value) {
+                            return value + 's';
+                        }
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Pressure (Pa)'
+                    }, ticks: {
+                        callback: function (value) {
+                            return value + ' Pa';
+                        }
+                    }
+                }]
+            }
+        }
+    });
+}
 
 function setupChart(){
     let ctx = document.getElementById('temperature-chart').getContext('2d');
@@ -90,12 +227,18 @@ async function nameOfFunction(event) {
     }
     const output = document.getElementById("output");
     let chartData = chart.data;
+    let pressureCharData = pressureChart.data;
+    let altitudeCharData = altitudeChart.data;
 
     for (let i=0;i<data.length;i++){
-        let temperature = data[i].temperature;
+
         let currentTimeChart = new Date(data[i].timeStamp);
+        let temperature = data[i].temperature;
+        let pressure = data[i].pressure;
+        let altitude =  data[i].altitude;
         let timeDifferenceChart = previousTimeChart ? currentTimeChart - previousTimeChart : 0;
         acum += timeDifferenceChart / 1000
+
         chartData.datasets[0].data.push(
             {
                 x: acum.toFixed(2),
@@ -103,7 +246,27 @@ async function nameOfFunction(event) {
                 date: currentTimeChart.toLocaleString(),
                 packetNumber: data[i].packetNumber
             });
+
+        pressureCharData.datasets[0].data.push(
+            {
+                x: acum.toFixed(2),
+                y: pressure,
+                date: currentTimeChart.toLocaleString(),
+                packetNumber: data[i].packetNumber
+            });
+
+        altitudeCharData.datasets[0].data.push(
+            {
+                x: acum.toFixed(2),
+                y: altitude,
+                date: currentTimeChart.toLocaleString(),
+                packetNumber: data[i].packetNumber
+            });
+
         previousTimeChart = currentTimeChart;
+
+
+
         output.innerHTML = '';
         const currentLat = parseFloat(data[i].latitude);
         const currentLng = parseFloat(data[i].longitude);
@@ -189,6 +352,10 @@ async function nameOfFunction(event) {
     }
 
     chart.update()
+
+    pressureChart.update()
+
+    altitudeChart.update()
 
 }
 

@@ -2,7 +2,7 @@
 #define GPS_MANAGER
 
 #include <TinyGPSPlus.h>
-#include "C:\Users\JAVIER\Documents\Arduino\libraries\SoftwareSerial\SoftwareSerial.h"
+#include <SoftwareSerial.h>
 #include "info_structure.h"
 
 class GPSManager {

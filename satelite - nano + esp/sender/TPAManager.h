@@ -20,13 +20,14 @@ class TPAManager {
 private:
   Adafruit_BMP280 bmp;
   HardwareSerial serialPort;
-  struct StateInfo & stateInfo;
+  struct StateInfo& stateInfo;
   const uint8_t rx2pin = 16;
   const uint8_t tx2pin = 17;
-  
+  const float ALTITUDE_THRESHOLD = 0.5; 
   SerialTransfer serialTransfer;
+  float prevAltitude;
 public:
-  TPAManager(struct StateInfo & stateInfo);
+  TPAManager(struct StateInfo& stateInfo);
   void setupBMP();
   void getTPAData();
   float dailyPressure = 1023.3;

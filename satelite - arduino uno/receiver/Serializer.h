@@ -1,13 +1,13 @@
 #ifndef SERIALIZER
 #define SERIALIZER
 
-#include <ArduinoJson.h>
 #include "info_structure.h"
-
+#include <SoftwareSerial.h>
+#include "Arduino.h"
 
 class Serializer {
 public:
-   static void Serializer::stateInfo2JSONString(struct StateInfo& stateInfo, String& json);
+   static void Serializer::printStateInfoToBothSerials(struct StateInfo& stateInfo, SoftwareSerial& espSerial);
 };
 
 

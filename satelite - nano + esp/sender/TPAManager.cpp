@@ -1,7 +1,6 @@
 #include "TPAManager.h"
 
 
-
 TPAManager::TPAManager(struct StateInfo& stateInfo)
   : stateInfo(stateInfo), serialPort(2) {
   Serial.begin(9600);
@@ -37,6 +36,18 @@ void TPAManager::getTPAData() {
       stateInfo.temperature = bmp.readTemperature();
       stateInfo.pressure = bmp.readPressure() / 100.0F;
       stateInfo.altitude = bmp.readAltitude(dailyPressure);
+    }
+    if (prevAltitude >= 0.0) {
+      float diff = stateInfo.altitude - prevAltitude;
+      if (diff > ALTITUDE_THRESHOLD) {
+        stateInfo.altitudeChangeStatus = 1;
+      } else if (diff < -ALTITUDE_THRESHOLD) {
+        stateInfo.altitudeChangeStatus = -1;
+      } else {
+        stateInfo.altitudeChangeStatus = 0;
+      }
+
+      prevAltitude = stateInfo.altitude;
     }
   }
 }

@@ -8,5 +8,6 @@
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="chartjs-adapter-luxon" level="application" />
     <orderEntry type="library" name="luxon" level="application" />
+    <orderEntry type="library" name="sweetalert2" level="application" />
   </component>
 </module>
