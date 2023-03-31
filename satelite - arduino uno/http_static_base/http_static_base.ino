@@ -3,9 +3,9 @@
 #include <ArduinoJson.h>
 #include <SerialTransfer.h>
 
-const char* ssid = "DIGIFIBRA-y54u";
-const char* password = "zKxYbSfcEF";
-const char* host = "192.168.1.133:3000";
+const char* ssid = "base0000";
+const char* password = "base0000";
+const char* host = "64.226.98.98:3000";
 
 SerialTransfer serialTransfer;
 

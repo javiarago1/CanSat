@@ -362,7 +362,7 @@ async function nameOfFunction(event) {
 
 // Load the Google Maps API
 function initMap() {
-    const socket = new WebSocket('ws://localhost:3000');
+    const socket = new WebSocket('ws://64.226.98.98:3000');
     socket.onmessage = nameOfFunction;
     setInterval(() => {
         socket.send(JSON.stringify({ packetNumber: lastPacketNumber }));

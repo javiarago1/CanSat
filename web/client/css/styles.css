@@ -104,7 +104,7 @@ a {
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 abbr[title] {
-  border-bottom: none;
+
   /* 1 */
   text-decoration: underline;
   /* 2 */
@@ -681,31 +681,12 @@ a {
 .search-top,
 .search-bottom,
 .textarea,
-.timezone {
-  border: 0.2rem solid #f3f2f2;
-  background-color: #fbfbfb;
-  color: #817f7f;
-  border-radius: 0.4rem;
-}
 
 .search-top:focus,
 .search-bottom:focus,
 .textarea:focus,
-.timezone:focus {
-  border: 0.2rem solid #7477bf;
-  transition: all 0.4s;
-}
 
-.search-border {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 3rem;
-}
-@media (min-width: 768px) {
-  .search-border {
-    margin: 3rem 0 3.2rem 0;
-  }
-}
+
 
 .dashboard-flex {
   display: flex;
@@ -891,7 +872,7 @@ GRID MAIN LAYOUT*
 
 .grid-2 {
   grid-area: traffic;
-  padding: 7rem 0 2.5rem 0;
+  padding: 2rem 0 0 0;
 }
 @media (min-width: 768px) {
   .grid-2 {
@@ -901,126 +882,63 @@ GRID MAIN LAYOUT*
 
 .grid-3 {
   grid-area: daily-traffic;
-  padding: 7rem 0 2.5rem 0;
+  padding: 0 0 0 0;
 
 }
 @media (min-width: 768px) {
   .grid-3 {
-    padding: 2.5rem 0 2.5rem 0;
+    padding: 15rem 0 0 0;
   }
 }
 @media (min-width: 1024px) {
   .grid-3 {
 
-    padding: 7rem 0 2.5rem 0.8rem;
+    padding: 15rem 0 0 0.8rem;
 
   }
 }
+
+#reset-button{
+
+  font-family: Roboto, sans-serif;
+  font-weight: 0;
+  font-size: 14px;
+  color: #fff;
+  background-color: #8c0101;
+  padding: 10px 30px;
+  border: solid #4d4d4d 2px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  border-radius: 8px;
+  transition : 319ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
 
 .grid-4 {
   grid-area: mobile-users;
-  padding: 7rem 0 2.5rem 0;
+  padding: 0 0 0 0;
 }
 @media (min-width: 768px) {
   .grid-4 {
-    padding: 2.5rem 0 2.5rem 0;
+    padding: 15rem 0 2.5rem 0;
   }
 }
 @media (min-width: 1024px) {
   .grid-4 {
-    padding: 7rem 0 2.5rem 0.8rem;
-  }
-}
-
-.grid-5 {
-  grid-area: social-stats;
-  padding: 7rem 0 2.5rem 0;
-}
-@media (min-width: 768px) {
-  .grid-5 {
-    padding: 2.5rem 0 2.5rem 0;
-  }
-}
-@media (min-width: 768px) {
-  .grid-5 {
-    padding: 0 3em 0 3em;
-  }
-}
-
-.grid-6 {
-  grid-area: new-members;
-  padding: 7rem 0 2.5rem 0;
-}
-@media (min-width: 768px) {
-  .grid-6 {
-    padding: 2.5rem 0 2.5rem 0;
-  }
-}
-@media (min-width: 1024px) {
-  .grid-6 {
-
-    padding-right: 3.2rem;
-  }
-}
-
-.grid-7 {
-  grid-area: recent-activity;
-  padding: 7rem 0 2.5rem 0;
-}
-@media (min-width: 768px) {
-  .grid-7 {
-    padding: 2.5rem 0 2.5rem 0;
-  }
-}
-@media (min-width: 1024px) {
-  .grid-7 {
-    padding-left: 3.2rem;
-  }
-}
-
-.grid-8 {
-  grid-area: message-user;
-  padding: 7rem 0 2.5rem 0;
-}
-@media (min-width: 768px) {
-  .grid-8 {
-    padding: 2.5rem 0 2.5rem 0;
-  }
-}
-@media (min-width: 1024px) {
-  .grid-8 {
-
-    padding: 1.6rem 3.2rem 1.6rem 0;
-  }
-}
-
-.grid-9 {
-  grid-area: settings;
-  padding: 7rem 0 2.5rem 0;
-}
-@media (min-width: 768px) {
-  .grid-9 {
-    padding: 2.5rem 0 2.5rem 0;
-  }
-}
-@media (min-width: 1024px) {
-  .grid-9 {
-    padding: 1.6rem 1.6rem 0 3.2rem;
+    padding: 15rem 0 2.5rem 0.8rem;
   }
 }
 
 .grid-10 {
   grid-area: footer;
   text-align: center;
-  margin-top: 7.5rem;
+  margin-top: 0rem;
 }
 
-.grid-4,
-.grid-6,
-.grid-7 {
-
-  border-bottom: 0.12rem solid #d1d1d1;
-}
 
 /*------------------------------------*\
   #NAVIGATION
@@ -1066,7 +984,7 @@ GRID MAIN LAYOUT*
 }
 
 .border-notif {
-  border-right: 0.2rem dotted #d1d1d1;
+
   margin: 1.8rem 1.1rem;
 }
 

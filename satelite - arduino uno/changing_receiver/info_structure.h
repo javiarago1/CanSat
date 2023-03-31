@@ -8,6 +8,7 @@ struct StateInfo {
   double temperature;
   double pressure;
   double altitude;
+  double altitudeStatus;
 };
 
 

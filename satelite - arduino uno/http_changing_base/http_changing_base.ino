@@ -1,73 +1,22 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
-#include <ArduinoJson.h>
-#include <SerialTransfer.h>
 
-const char* ssid = "DIGIFIBRA-y54u";
-const char* password = "zKxYbSfcEF";
-const char* host = "192.168.1.133:3000";
+const char* ssid = "base2222";
+const char* password = "base2222";
+const char* host = "64.226.98.98:3000";
 
-SerialTransfer serialTransfer;
-
-struct PressureInfo {
-  float pressure;
-};
-
-struct PressureInfo pressureInfo;
 
 void setup() {
   Serial.begin(9600);
-  serialTransfer.begin(Serial);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Connecting to WiFi...");
   }
   Serial.println("Connected to WiFi");
-  getPressureAndSendToUNO();
 }
 
-void getPressureAndSendToUNO() {
-  if (WiFi.status() == WL_CONNECTED) {
-    HTTPClient http;
-    WiFiClient client;
-
-    http.begin(client, "http://" + String(host) + "/api/pressure");
-    int httpCode = http.GET();
-
-    if (httpCode > 0) {
-      if (httpCode == HTTP_CODE_OK) {
-        String payload = http.getString();
-
-        StaticJsonDocument<512> doc;
-        DeserializationError error = deserializeJson(doc, payload);
-
-        if (!error) {
-          unsigned long startTime = millis();
-          bool pressureReceived = false;
-          float pressure = doc["pressure"];
-          pressureInfo.pressure = pressure;
-          while (!pressureReceived && millis() - startTime < 20000) {
-            uint16_t sendSize = 0;
-            sendSize = serialTransfer.txObj(pressureInfo, sendSize);
-            serialTransfer.sendData(sendSize);
-            delay(500);
-            if (serialTransfer.available()) {
-              pressureReceived = true;
-            }
-          }
-        } else {
-          Serial.println("Error al deserializar el JSON");
-        }
-      }
-    } else {
-      Serial.println("Error en la solicitud HTTP");
-    }
-
-    http.end();
-  }
-}
 
 void sendDataToServer(String json) {
   bool sent = false;

@@ -39,7 +39,7 @@ function showResetAlert() {
         }).then((result) => {
             let username = result.value.login
             let password = result.value.password
-            fetch('http://localhost:3000/login', {
+            fetch('http://64.226.98.98:3000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ function sendResetRequest() {
 
 
     // Enviar solicitud HTTP al servidor
-    fetch('http://localhost:3000/reset-services', {
+    fetch('http://64.226.98.98:3000/reset-services', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`,
@@ -99,6 +99,8 @@ function sendResetRequest() {
                     text: 'Redis y MySQL se han reiniciado correctamente',
                     icon: 'success'
                 });
+                window.location.reload()
+
             } else {
                 Swal.fire({
                     title: 'Error',
