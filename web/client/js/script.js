@@ -266,87 +266,87 @@ async function nameOfFunction(event) {
         previousTimeChart = currentTimeChart;
 
 
+        if (data[i].latitude!==0 && data[i].longitude!==0) {
+            output.innerHTML = '';
+            const currentLat = parseFloat(data[i].latitude);
+            const currentLng = parseFloat(data[i].longitude);
 
-        output.innerHTML = '';
-        const currentLat = parseFloat(data[i].latitude);
-        const currentLng = parseFloat(data[i].longitude);
+            let currentTime = data[i].timeStamp;
+            currentTime = Date.parse(data[i].timeStamp);
 
-        let currentTime = data[i].timeStamp;
-        currentTime= Date.parse(data[i].timeStamp);
+            // Calculate the distance and speed if the previous position and time are defined
+            if (previousPosition && previousTime && data.length <= 3) {
 
-        // Calculate the distance and speed if the previous position and time are defined
-        if (previousPosition && previousTime && data.length<=3) {
+                // Calculate the distance between the previous position and the current position
+                const distance = google.maps.geometry.spherical.computeDistanceBetween(
+                    new google.maps.LatLng(previousPosition),
+                    new google.maps.LatLng(currentLat, currentLng)
+                );
 
-            // Calculate the distance between the previous position and the current position
-            const distance = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(previousPosition),
-                new google.maps.LatLng(currentLat, currentLng)
-            );
+                // Calculate the time elapsed between the previous time and the current time
+                let timeElapsed = (currentTime - previousTime) / 1000.0; // convert from milliseconds to seconds
 
-            // Calculate the time elapsed between the previous time and the current time
-            let timeElapsed = (currentTime - previousTime) / 1000.0; // convert from milliseconds to seconds
+                // Calculate the speed in meters per second
+                const speed = distance / timeElapsed;
 
-            // Calculate the speed in meters per second
-            const speed = distance / timeElapsed;
-
-            // Calculate the heading (direction)
-            const heading = google.maps.geometry.spherical.computeHeading(
-                previousPosition,
-                new google.maps.LatLng(currentLat, currentLng)
-            );
+                // Calculate the heading (direction)
+                const heading = google.maps.geometry.spherical.computeHeading(
+                    previousPosition,
+                    new google.maps.LatLng(currentLat, currentLng)
+                );
 
 
-            // Add the distance, speed, and heading to the HTML output
+                // Add the distance, speed, and heading to the HTML output
 
-            document.getElementById("latitude").innerText=`Latitude:  ${currentLat}`;
-            document.getElementById("longitude").innerText=`Longitude: ${currentLng}`;
-            document.getElementById("distance_traveled").innerText=`Distance traveled: ${distance.toFixed(2)} m`;
-            document.getElementById("speed").innerText=`Speed : ${speed.toFixed(2)} m/s`;
-            document.getElementById("heading").innerText=`Heading : ${heading.toFixed(2)} °`;
+                document.getElementById("latitude").innerText = `Latitude:  ${currentLat}`;
+                document.getElementById("longitude").innerText = `Longitude: ${currentLng}`;
+                document.getElementById("distance_traveled").innerText = `Distance traveled: ${distance.toFixed(2)} m`;
+                document.getElementById("speed").innerText = `Speed : ${speed.toFixed(2)} m/s`;
+                document.getElementById("heading").innerText = `Heading : ${heading.toFixed(2)} °`;
 
+            }
+
+            // Update the previous position and time
+            previousPosition = new google.maps.LatLng(currentLat, currentLng);
+            previousTime = currentTime;
+
+            // Create a new LatLng object
+            const latLng = new google.maps.LatLng(currentLat, currentLng);
+
+            // Update the route
+            route.push(latLng);
+
+            // Center the map on the new LatLng object
+            if (!map) {
+                // Create the map if it doesn't exist yet
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: latLng,
+                    zoom: 16,
+                });
+            } else {
+                // Update the map center if it already exists
+                map.setCenter(latLng);
+            }
+
+            // Add a marker to the map if the route is empty and the starting marker hasn't been added
+            if (route.length === 1) {
+                new google.maps.Marker({
+                    position: latLng,
+                    map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 10,
+                        fillColor: 'red',
+                        fillOpacity: 1,
+                        strokeWeight: 0,
+                    },
+                });
+            }
+
+
+            polyline.setMap(map);
+            polyline.setPath(route);
         }
-
-        // Update the previous position and time
-        previousPosition = new google.maps.LatLng(currentLat, currentLng);
-        previousTime = currentTime;
-
-        // Create a new LatLng object
-        const latLng = new google.maps.LatLng(currentLat, currentLng);
-
-        // Update the route
-        route.push(latLng);
-
-        // Center the map on the new LatLng object
-        if (!map) {
-            // Create the map if it doesn't exist yet
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: latLng,
-                zoom: 16,
-            });
-        } else {
-            // Update the map center if it already exists
-            map.setCenter(latLng);
-        }
-
-        // Add a marker to the map if the route is empty and the starting marker hasn't been added
-        if (route.length === 1) {
-            new google.maps.Marker({
-                position: latLng,
-                map,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 10,
-                    fillColor: 'red',
-                    fillOpacity: 1,
-                    strokeWeight: 0,
-                },
-            });
-        }
-
-
-        polyline.setMap(map);
-        polyline.setPath(route);
-
 
 
     }

@@ -4,11 +4,11 @@ const app = require('./api_routes');
 const websocket = require('./websocket_server');
 
 const db = mysql.createConnection({
-    host: 'db-satelite-do-user-13771732-0.b.db.ondigitalocean.com',
-    user: 'javier',
-    password: 'AVNS_IoBshhllaHmSQ-5aiQQ',
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
     database: 'satelite',
-    port: 25060
+    port: 3306
 });
 
 

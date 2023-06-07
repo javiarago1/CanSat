@@ -27,11 +27,11 @@ void TPAManager::getTPAData() {
       firstTime = true;
     }
     // Comprobar si se ha subido o bajado
-    if (stateInfo.altitude - prevAltitude > 2) {  // si la diferencia es mayor que 0.75 m
+    if (stateInfo.altitude - prevAltitude > 5) {  // si la diferencia es mayor que 0.75 m
       hasAscended = true;
       prevAltitude = stateInfo.altitude;
       hasAscended = true;
-    } else if (hasAscended && prevAltitude - stateInfo.altitude > 2) {  // si ya se ha subido y la diferencia es mayor que 0.75 m
+    } else if (hasAscended && prevAltitude - stateInfo.altitude > 5) {  // si ya se ha subido y la diferencia es mayor que 0.75 m
       // Encender el LED
       pinMode(13, OUTPUT);
       digitalWrite(13, HIGH);

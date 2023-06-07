@@ -13,11 +13,11 @@ api_routes.use(cors());
 api_routes.use(bodyParser.json());
 
 const db = mysql.createConnection({
-    host: 'db-satelite-do-user-13771732-0.b.db.ondigitalocean.com',
-    user: 'javier',
-    password: 'AVNS_IoBshhllaHmSQ-5aiQQ',
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
     database: 'satelite',
-    port: 25060
+    port: 3306
 });
 
 const sessions = [];

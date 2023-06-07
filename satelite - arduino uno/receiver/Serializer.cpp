@@ -6,8 +6,8 @@ void Serializer::printStateInfoToBothSerials(struct StateInfo& stateInfo, Softwa
   String json = "";
   json = "{";
   json += "\"packetNumber\":" + String(stateInfo.packetNumber) + ",";
-  json += "\"latitude\":" + String(stateInfo.latitude) + ",";
-  json += "\"longitude\":" + String(stateInfo.longitude) + ",";
+  json += "\"latitude\":" + String(stateInfo.latitude, 6) + ",";
+  json += "\"longitude\":" + String(stateInfo.longitude, 6) + ",";
   Serial.print(json);
   espSerial.print(json);
   json = "";

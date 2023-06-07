@@ -11,12 +11,8 @@ def read_serial():
     while True:
         try:
 
-          
             ser = serial.Serial('COM8', 9600, timeout=1)
             global lastData
-      
-
- 
 
             while True:
                 line = ser.readline()  # read a byte

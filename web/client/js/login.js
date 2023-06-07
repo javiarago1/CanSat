@@ -107,13 +107,13 @@ function sendResetRequest() {
                     text: 'Hubo un problema al reiniciar los servicios',
                     icon: 'error'
                 });
+                logout()
             }
         });
 
 }
 
 function logout(){
-    console.log("?")
     localStorage.removeItem('sessionToken');
     window.location.reload();
 
