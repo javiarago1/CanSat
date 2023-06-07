@@ -14,7 +14,7 @@ api_routes.use(bodyParser.json());
 
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: 'cansat',
     password: 'password',
     database: 'satelite',
     port: 3306

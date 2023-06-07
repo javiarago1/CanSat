@@ -5,7 +5,7 @@ const websocket = require('./websocket_server');
 
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: 'cansat',
     password: 'password',
     database: 'satelite',
     port: 3306
