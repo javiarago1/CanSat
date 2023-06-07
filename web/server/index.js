@@ -4,7 +4,7 @@ const app = require('./api_routes');
 const websocket = require('./websocket_server');
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'cansat',
     password: 'password',
     database: 'satelite',

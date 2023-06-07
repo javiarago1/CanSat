@@ -13,7 +13,7 @@ api_routes.use(cors());
 api_routes.use(bodyParser.json());
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'cansat',
     password: 'password',
     database: 'satelite',
