@@ -85,7 +85,7 @@ function sendResetRequest() {
 
 
     // Enviar solicitud HTTP al servidor
-    fetch('http://64.226.98.98:3000/reset-services', {
+    fetch('http://164.90.209.79:3000/reset-services', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`,
